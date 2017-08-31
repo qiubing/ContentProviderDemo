@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.contentproviderserver" >
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+
+    <permission android:name="com.example.studentprovider.read"
+        android:label="read provider permission"
+        android:protectionLevel="normal"/>
+
+    <permission android:name="com.example.studentprovider.write"
+        android:label="write provider permission"
+        android:protectionLevel="normal"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name=".StudentContentProvider"
+            android:authorities="com.example.studentprovider"
+            android:writePermission="com.example.studentprovider.write"
+            android:readPermission="com.example.studentprovider.read"
+            android:exported="true">
+        </provider>
+
+        <activity android:name=".SecondActivity">
+            <intent-filter>
+                <action android:name="com.example.provider.secondactivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.dir/all.student"/>
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
